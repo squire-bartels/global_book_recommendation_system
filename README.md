@@ -1,4 +1,5 @@
-Global Book Recommendation System
+#Global Book Recommendation System
+![image](https://github.com/user-attachments/assets/03b8ad18-dee0-49f6-8321-d3913a8a91fb)
 
 This project is a machine learning-based recommendation system that suggests similar books using collaborative filtering.
 
