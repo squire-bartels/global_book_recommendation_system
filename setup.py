@@ -12,7 +12,6 @@ LIST_OF_REQUIREMENTS = [
     "numpy",           # NumPy for numerical operations
     "pandas",          # Pandas for data manipulation
     "scikit-learn",    # Scikit-learn for machine learning algorithms
-    "-e .",
     "nltk",
     "PyYAML"
 ]
