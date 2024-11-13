@@ -11,9 +11,7 @@ LIST_OF_REQUIREMENTS = [
     "streamlit",       # Streamlit for web app
     "numpy",           # NumPy for numerical operations
     "pandas",          # Pandas for data manipulation
-    "scikit-learn",    # Scikit-learn for machine learning algorithms
-    "nltk",
-    "PyYAML"
+    "scikit-learn"  # Scikit-learn for machine learning algorithms
 ]
 
 setup(
