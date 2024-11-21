@@ -84,7 +84,7 @@ if st.button('Show Recommendations'):
         st.write(f"Books similar to '{selected_books}':")
 
         # Get the recommended books and posters
-        recommended_books, posters = recommend_books(selected_books, genre=genre, min_rating=ratings)
+        #recommended_books, posters = recommend_books(selected_books, genre=genre, min_rating=ratings)
         
         # Display the recommended books and their posters
         cols = st.columns(5)
