@@ -6,10 +6,10 @@ import numpy as np
 st.title("Global Book Recommendation System")
 
 # Loading the necessary artifacts (model, books, ratings, pivot table)
-model = pickle.load(open('artifacts/model.pkl', 'rb'))
-books_name = pickle.load(open('artifacts/books_name.pkl', 'rb'))
-final_ratings = pickle.load(open('artifacts/final_ratings.pkl', 'rb'))
-book_pivot = pickle.load(open('artifacts/book_pivot.pkl', 'rb'))
+model = pickle.load(open('./data/artifacts/model.pkl', 'rb'))
+books_name = pickle.load(open('./data/artifacts/books_name.pkl', 'rb'))
+final_ratings = pickle.load(open('./data/artifacts/final_ratings.pkl', 'rb'))
+book_pivot = pickle.load(open('./data/artifacts/book_pivot.pkl', 'rb'))
 
 
 # Function to fetch posters for the recommended books
