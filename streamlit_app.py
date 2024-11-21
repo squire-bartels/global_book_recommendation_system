@@ -48,71 +48,27 @@ def fetch_poster(suggestions):
 
 # Function to recommend books based on the selected book
 def recommended_books(book_name, min_rating=None):
-    # Finding the index of the selected book in the pivot table
     try:
         book_id = np.where(book_pivot.index == book_name)[0][0]
     except IndexError:
         st.error(f"Book '{book_name}' not found in the database.")
         return [], []
 
-    # Finding distances and indices of similar books using KNN model
     distances, suggestions = model.kneighbors(book_pivot.iloc[book_id, :].values.reshape(1, -1), n_neighbors=6)
-    
-    # Prepare list of recommended books
-    book_list = []
-    filtered_book_list = []
-    filtered_poster_list = []
 
-    for i in range(1, len(suggestions[0])):  # Start from 1 to skip the original book
+    book_list = []
+    include_book = True  # Initialize this variable
+
+    for i in range(1, len(suggestions[0])):
         book = book_pivot.index[suggestions[0][i]]
-        
-        # Apply genre and rating filters if specified
-        
+
         if min_rating:
             book_rating = final_ratings[final_ratings['title'] == book]['rating'].values
-            include_book = include_book and (len(book_rating) > 0 and book_rating[0] >= min_rating)
-        
+            include_book = len(book_rating) > 0 and book_rating[0] >= min_rating
+
         if include_book:
             book_list.append(book)
-    
-    # Fetch posters for the filtered books
+
     poster_url = fetch_poster(suggestions[0][1:len(book_list)+1])
-    
+
     return book_list, poster_url
-
-
-# Select a book from the dropdown
-selected_books = st.selectbox(
-    "Type or select a book from the dropdown",
-    books_name
-)
-
-# Recommend books when a button is clicked
-if st.button('Show Recommendations'):
-    if selected_books:
-        st.write(f"Books similar to '{selected_books}':")
-        
-        # Get the recommended books and posters with optional filters
-        recommended_books_list, posters = recommended_books(
-            selected_books,  
-            min_rating=rating_filter
-        )
-        
-        # Display the recommended books and their posters
-        if recommended_books_list:
-            cols = st.columns(5)
-            for i in range(len(recommended_books_list)):
-                with cols[i]:
-                    st.text(recommended_books_list[i])
-                    st.image(posters[i])
-        else:
-            st.warning("No recommendations found matching the filters.")
-
-# Feedback form
-st.subheader("Give Feedback")
-feedback = st.text_area("How can we improve?")
-if st.button("Submit Feedback"):
-    # Save feedback to a log file or a database
-    with open("feedback.txt", "a") as f:
-        f.write(feedback + "\n")
-    st.success("Thank you for your feedback!")
