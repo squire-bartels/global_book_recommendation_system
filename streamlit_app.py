@@ -1,12 +1,7 @@
 import streamlit as st
 import pickle
 import numpy as np
-import nltk
-from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
 
-nltk.download('punkt_tab')
-nltk.download('stopwords')
 
 # Add custom CSS styling for UI improvements
 st.markdown("""
