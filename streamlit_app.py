@@ -47,7 +47,7 @@ def fetch_poster(suggestions):
     return poster_url
 
 # Function to recommend books based on the selected book
-def recommend_books(books_name, genre=None, min_rating=None):
+def recommended_books(books_name, genre=None, min_rating=None):
     book_list = []
     
     # Filter the book list based on genre and rating
