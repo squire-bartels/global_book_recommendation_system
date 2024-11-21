@@ -47,7 +47,7 @@ def fetch_poster(suggestions):
     return poster_url
 
 # Function to recommend books based on the selected book
-def recommended_books(book_name, genre=None, min_rating=None):
+def recommended_books(book_name, min_rating=None):
     # Finding the index of the selected book in the pivot table
     try:
         book_id = np.where(book_pivot.index == book_name)[0][0]
@@ -67,10 +67,6 @@ def recommended_books(book_name, genre=None, min_rating=None):
         book = book_pivot.index[suggestions[0][i]]
         
         # Apply genre and rating filters if specified
-        include_book = True
-        if genre:
-            book_genre = final_ratings[final_ratings['title'] == book]['genre'].values
-            include_book = include_book and (len(book_genre) > 0 and book_genre[0] in genre)
         
         if min_rating:
             book_rating = final_ratings[final_ratings['title'] == book]['rating'].values
@@ -84,11 +80,6 @@ def recommended_books(book_name, genre=None, min_rating=None):
     
     return book_list, poster_url
 
-# Optional genre and rating filters
-st.sidebar.header("Recommendation Filters")
-genre_options = final_ratings['genre'].unique()
-genre_filter = st.sidebar.multiselect("Filter by Genre", genre_options)
-rating_filter = st.sidebar.slider("Minimum Rating", 0.0, 5.0, 3.0)
 
 # Select a book from the dropdown
 selected_books = st.selectbox(
@@ -103,8 +94,7 @@ if st.button('Show Recommendations'):
         
         # Get the recommended books and posters with optional filters
         recommended_books_list, posters = recommended_books(
-            selected_books, 
-            genre=genre_filter if genre_filter else None, 
+            selected_books,  
             min_rating=rating_filter
         )
         
