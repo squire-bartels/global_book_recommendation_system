@@ -1,5 +1,8 @@
-streamlit
-numpy
-pandas
-scikit-learn
--e . 
+streamlit      
+numpy            
+scikit-learn      
+pandas             
+pillow     
+scipy
+requests
+
